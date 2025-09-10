@@ -44,7 +44,7 @@ class GeneratorControlState:
             {"trigger": "manual_start", "source": "off", "dest": "running_manual"},
             {"trigger": "user_start", "source": ["off", "error"], "dest": "starting_user"},
             {"trigger": "user_has_started", "source": "starting_user", "dest": "running_user"},
-            {"trigger": "user_stop", "source": "running_user", "dest": "stopping_user"},
+            {"trigger": "user_stop", "source": ["starting_user", "running_user"], "dest": "stopping_user"},
             {"trigger": "auto_run_start", "source": "off", "dest": "starting_auto"},
             {"trigger": "auto_has_started", "source": "starting_auto", "dest": "warmup_auto"},
             {"trigger": "warmup_auto_complete", "source": ["warmup_auto", "cooldown_auto"], "dest": "running_auto"},
