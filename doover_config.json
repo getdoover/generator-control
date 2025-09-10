@@ -85,6 +85,16 @@
                     "type": "boolean",
                     "description": "Whether to send error notifications",
                     "default": true
+                },
+                "position": {
+                    "title": "Position",
+                    "x-name": "position",
+                    "x-hidden": false,
+                    "type": "integer",
+                    "description": "The position of the generator control app in the UI. Smaller is higher, larger is lower. 100 is the default position of most apps.",
+                    "default": 119,
+                    "minimum": 0,
+                    "maximum": 999
                 }
             },
             "additionalElements": true,

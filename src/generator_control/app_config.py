@@ -46,6 +46,14 @@ class GeneratorControlConfig(config.Schema):
             default=True,
         )
 
+        self.position = config.Integer(
+            "Position",
+            default=119,  # fairly low
+            minimum=0,
+            maximum=999,
+            description="The position of the generator control app in the UI. Smaller is higher, larger is lower. 100 is the default position of most apps.",
+        )
+
     @property
     def error_timeout_seconds(self):
         return self.error_timeout.value * 60 * 60

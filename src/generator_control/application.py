@@ -35,6 +35,7 @@ class GeneratorControlApplication(Application):
         self.state = GeneratorControlState(self)
 
         self.ui_manager.set_display_name(self.config.display_name.value)
+        self.ui_manager.set_position(self.config.position.value)
         self.ui_manager.add_children(*self.ui.fetch())
         await self.update_inputs()
 
