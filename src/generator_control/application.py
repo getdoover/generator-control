@@ -60,7 +60,7 @@ class GeneratorControlApplication(Application):
             ]:
             await self.set_run_command(False)
 
-        elif state in ["starting_user", "starting_auto", "warmup_auto", "running_auto", "cooldown_auto"]:
+        elif state in ["starting_user", "running_user", "starting_auto", "warmup_auto", "running_auto", "cooldown_auto"]:
             await self.set_run_command(True)
 
         ## Update the display string

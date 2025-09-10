@@ -50,7 +50,7 @@ class GeneratorControlState:
             {"trigger": "warmup_auto_complete", "source": ["warmup_auto", "cooldown_auto"], "dest": "running_auto"},
             {"trigger": "cooling_down_auto", "source": "running_auto", "dest": "cooldown_auto"},
             {"trigger": "cooling_down_auto_complete", "source": "cooldown_auto", "dest": "off"},
-            {"trigger": "auto_stop", "source": "cooling_down_auto_complete", "dest": "stopping_auto"},
+            {"trigger": "auto_stop", "source": ["warmup_auto", "cooling_down_auto_complete"], "dest": "stopping_auto"},
             {"trigger": "generator_stopped", "source": ["running_manual", "starting_user", "running_user", "stopping_user", "starting_auto", "warmup_auto", "running_auto", "cooldown_auto", "stopping_auto"], "dest": "off"},
             {"trigger": "set_error", "source": "*", "dest": "error"},
             {"trigger": "unset_error", "source": "error", "dest": "off"},
@@ -130,7 +130,7 @@ class GeneratorControlState:
 
         elif s == "warmup_auto":
             if not self.app.has_run_request():
-                await self.generator_stopped()
+                await self.auto_stop()
             elif not self.app.get_is_running(stable_time=2, stable_value=True):
                 await self.trigger_error()
 
@@ -144,7 +144,7 @@ class GeneratorControlState:
             if self.app.has_run_request():
                 await self.warmup_auto_complete()
             elif not self.app.get_is_running(stable_time=2, stable_value=True):
-                await self.auto_stop()    
+                await self.generator_stopped()    
 
         elif s == "stopping_auto":
             if not self.app.get_is_running(stable_time=2, stable_value=True):
