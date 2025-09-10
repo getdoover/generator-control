@@ -36,7 +36,7 @@ class GeneratorControlState:
             {"name": "starting_auto", "timeout": 45, "on_timeout": "trigger_error"},
             {"name": "warmup_auto", "timeout": self.app.config.warmup_time.value, "on_timeout": "warmup_auto_complete"},
             {"name": "running_auto"},
-            {"name": "cooldown_auto", "timeout": self.app.config.cooldown_time.value, "on_timeout": "cooling_down_auto_complete"},
+            {"name": "cooldown_auto", "timeout": self.app.config.cooldown_time.value, "on_timeout": "auto_stop"},
             {"name": "stopping_auto", "timeout": 30, "on_timeout": "trigger_error"},
         ]
 
@@ -49,8 +49,7 @@ class GeneratorControlState:
             {"trigger": "auto_has_started", "source": "starting_auto", "dest": "warmup_auto"},
             {"trigger": "warmup_auto_complete", "source": ["warmup_auto", "cooldown_auto"], "dest": "running_auto"},
             {"trigger": "cooling_down_auto", "source": "running_auto", "dest": "cooldown_auto"},
-            {"trigger": "cooling_down_auto_complete", "source": "cooldown_auto", "dest": "off"},
-            {"trigger": "auto_stop", "source": ["warmup_auto", "cooling_down_auto_complete"], "dest": "stopping_auto"},
+            {"trigger": "auto_stop", "source": ["warmup_auto", "cooldown_auto"], "dest": "stopping_auto"},
             {"trigger": "generator_stopped", "source": ["running_manual", "starting_user", "running_user", "stopping_user", "starting_auto", "warmup_auto", "running_auto", "cooldown_auto", "stopping_auto"], "dest": "off"},
             {"trigger": "set_error", "source": "*", "dest": "error"},
             {"trigger": "unset_error", "source": "error", "dest": "off"},
