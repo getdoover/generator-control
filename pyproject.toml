@@ -1,5 +1,5 @@
 [project]
-name = "app-template"
+name = "generator-control"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -10,12 +10,17 @@ dependencies = [
 ]
 
 [project.scripts]
-doover-app-run = "app_template:main"
-export-config = "app_template.app_config:export"
+doover-app-run = "generator_control:main"
+export-config = "generator_control.app_config:export"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "strict"
 
 [dependency-groups]
 dev = [

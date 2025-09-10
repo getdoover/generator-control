@@ -1,6 +1,9 @@
 {
-    "simulator_app_key": "sim_app_key",
-    "digital_input_count": 1,
-    "digital_output_count": 2,
-    "a_funny_message": "yeeha"
+    "display_name": "Generator 1",
+    "run_command_pin": 0,
+    "run_sense_pins": [0],
+    "warmup_time": 60,
+    "cooldown_time": 30,
+    "error_timeout": 0.5,
+    "send_error_notifications": true
 }

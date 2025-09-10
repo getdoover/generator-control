@@ -2,23 +2,33 @@ services:
   device_agent:
     image: spaneng/doover_device_agent:apps
     network_mode: host
+    ports:
+      - 49201:49201
+      - 50051:50051
+    attach: false
 
-  sample_simulator:
-    build: ./sample
+  platform_iface:
+    image: spaneng/doover_platform_iface
     network_mode: host
-    restart: unless-stopped
-    depends_on:
-      - device_agent
-    environment:
-      - APP_KEY=sim_app_key
+    entrypoint: python3 -u platform_iface.py --type=sim
+    attach: false
 
-  sample_application:
+  # sample_simulator:
+  #   build: ./sample
+  #   network_mode: host
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - device_agent
+  #   environment:
+  #     - APP_KEY=sim_app_key
+
+  sim_generator_control:
     build: ../
     network_mode: host
     restart: unless-stopped
     depends_on:
       - device_agent
-      - sample_simulator
+      # - sample_simulator
     environment:
-      - APP_KEY=test_app_key
+      - APP_KEY=sim_generator_control
       - CONFIG_FP=/app/simulators/app_config.json
