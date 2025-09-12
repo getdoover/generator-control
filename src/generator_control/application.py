@@ -20,7 +20,7 @@ class GeneratorControlApplication(Application):
         self.ui: GeneratorControlUI = None
         self.state: GeneratorControlState = None
 
-        self.loop_target_period = 0.5  # seconds
+        self.loop_target_period = 2  # seconds
 
         self.last_is_running = False
         self.last_is_running_change = time.time()
