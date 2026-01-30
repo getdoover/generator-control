@@ -11,7 +11,7 @@
             "platform_interface"
         ],
         "owner_org_key": "",
-        "image_name": "ghcr.io/getdoover/generator-control:main",
+        "image_name": "ghcr.io/getdoover/generator-control:dv1",
         "container_registry_profile_key": "",
         "build_args": "--platform linux/amd64,linux/arm64",
         "config_schema": {
